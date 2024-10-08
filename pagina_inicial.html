@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Estilo da página */
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1c1f26, #2d3347); /* Gradiente moderno em tons de azul escuro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+        }
+
+        /* Estilo do container */
+        .container {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+            backdrop-filter: blur(10px); /* Desfoque de fundo */
+            transition: all 0.4s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px); /* Leve elevação no hover */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+        }
+
+        /* Título principal */
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            letter-spacing: 1.5px;
+            color: #e0e6ed; /* Cinza claro */
+        }
+
+        /* Estilo dos botões */
+        .button {
+            display: inline-block;
+            padding: 15px 40px;
+            margin: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(145deg, #0073e6, #005bb5); /* Gradiente azul moderno */
+            border: none;
+            border-radius: 50px; /* Bordas arredondadas */
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        /* Efeito de hover nos botões */
+        .button:hover {
+            background: linear-gradient(145deg, #005bb5, #0073e6); /* Inverte o gradiente */
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Sombra mais intensa */
+            transform: translateY(-3px); /* Leve elevação no hover */
+        }
+
+        /* Ajustes de responsividade para telas menores */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .button {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Escolha o Caminho</h1>
+        <!-- Botões para diferentes apontamentos -->
+        <a href="index.html" class="button">Apontamento</a>
+        <a href="exibirRelatos.html" class="button">Relatorio</a>
+    </div>
+
+</body>
+</html>
