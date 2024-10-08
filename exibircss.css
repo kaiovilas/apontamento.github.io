@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(128, 129, 129));;
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+}
+
+h1 {    
+    color: #000000;
+    font-size: 30px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.5rem;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid rgb(150, 147, 147);
+    border-radius: 15px;    
+    background-color: rgb(199, 198, 201);
+}
+
+li {
+    background: #fff;
+    margin: 10px 0; 
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+li:nth-child(odd) {
+    background: #f9f9f9; 
+}
