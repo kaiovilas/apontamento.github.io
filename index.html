@@ -1,76 +1,155 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Relato do Dia</title>
-    <script type="module">
-        // Importando as bibliotecas do Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
+    <title>Página de Login</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDdq_kV9MrE7xWo5vJ61tZV33L0B-UQKvE",
-            authDomain: "relato-producao.firebaseapp.com",
-            projectId: "relato-producao",
-            storageBucket: "relato-producao.appspot.com",
-            messagingSenderId: "645787294401",
-            appId: "1:645787294401:web:40a4ef0dbb7adaf5da1240",
-            measurementId: "G-JNTFWK7MBR"
-        };
+        /* Fundo da página com gradiente */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradiente em azul */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
+        /* Estilo do container de login */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Fundo translúcido */
+            padding: 40px;
+            width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: #ffffff;
+        }
 
-        window.enviarDados = function() {
-            const dados = {};
-            for (let i = 1; i <= 8; i++) {
-                dados[`input${i}`] = document.getElementById(`input${i}`).value;
+        /* Título da página */
+        h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #e0e6ed; /* Cinza claro */
+        }
+
+        /* Estilo dos campos de input */
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.2); /* Fundo translúcido */
+            color: #ffffff;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Efeito ao focar nos inputs */
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            background-color: rgba(255, 255, 255, 0.3); /* Fundo mais claro no foco */
+        }
+
+        /* Estilo do botão de login */
+        .login-container button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #0073e6;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        /* Efeito no botão ao passar o mouse */
+        .login-container button:hover {
+            background-color: #005bb5;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Link de "Esqueci minha senha" */
+        .login-container a {
+            display: block;
+            margin-top: 15px;
+            color: #cfd8dc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Efeito no link ao passar o mouse */
+        .login-container a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsividade para telas menores */
+        @media (max-width: 400px) {
+            .login-container {
+                width: 90%;
             }
-            // Coletar dados das textareas
-            dados['segurancaMeioAmbiente'] = document.getElementById('segurancaMeioAmbiente').value;
-            dados['manutencao1'] = document.getElementById('manutencao1').value;
-            dados['manutencao2'] = document.getElementById('manutencao2').value;
-            dados['absenteismo'] = document.getElementById('absenteismo').value;
 
-            const dataHora = new Date().toISOString().replace(/[:.]/g, '-');
-            console.log('Dados a serem enviados:', { ...dados, dataHora });
-            set(ref(database, 'relatos/' + dataHora), { ...dados, dataHora })
-                .then(() => {
-                    alert('Dados armazenados com sucesso!');
-                    document.getElementById('meuForm').reset();
-                })
-                .catch((error) => {
-                    console.error('Erro ao armazenar dados:', error);
-                    alert('Erro ao armazenar dados.');
-                });
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .rodape{
+            display: flex;
+            flex-direction: column;
+            font-size: 10px;
+        }
+    </style>
+
+    <script>
+        function verificacao(){
+            let usuario = document.getElementById('usuario').value;
+            let senha = document.getElementById("senha").value;
+
+            if(usuario == 'lider' && senha == '1234'){
+                window.location.href= "relato.html"
+            }
+
+            if(usuario == 'admin' && senha == '1234'){
+                window.location.href= "pagina_inicial.html"
+            }
         }
     </script>
+
 </head>
-<body class="principal">
-    <section class="cabecalho">
-        <h1 class="cabecalho_titulo">APONTAMENTO DE PRODUÇÃO GERAL</h1>
-    </section>
-    <section class="secao_principal">
-        <form id="meuForm">
-            <input type="text" placeholder="LCT01" id="input1" class="entrada"><br>
-            <input type="text" placeholder="LCT03" id="input2" class="entrada"><br>
-            <input type="text" placeholder="LPP03" id="input3" class="entrada"><br>
-            <input type="text" placeholder="DOB02" id="input4" class="entrada"><br>
-            <input type="text" placeholder="FUR01" id="input5" class="entrada"><br>
-            <input type="text" placeholder="LFT01" id="input6" class="entrada"><br>
-            <input type="text" placeholder="LCL03" id="input7" class="entrada"><br>
-            <input type="text" placeholder="PR03" id="input8" class="entrada"><br>
-            <textarea class="entrada" placeholder="Segurança e Meio Ambiente:" id="segurancaMeioAmbiente" rows="4" cols="50"></textarea>
-            <textarea class="entrada" placeholder="Manutenção 1:" id="manutencao1" rows="4" cols="50"></textarea>
-            <textarea class="entrada" placeholder="Absenteísmo::" id="manutencao2" rows="4" cols="50"></textarea>
-            <textarea class="entrada" placeholder="OBSERVAÇÃO" id="absenteismo" rows="4" cols="50"></textarea>
-            <button type="button" onclick="enviarDados()" class="botao">REPORTAR</button>
-        </form>
-    </section>
+<body>
+
+    <div class="login-container">
+        <h2>Login</h2>
+        <!-- Campo de Usuário -->
+        <input id="usuario" type="text" placeholder="Usuário" required>
+        <!-- Campo de Senha -->
+        <input id="senha" type="password" placeholder="Senha" required>
+        <!-- Botão de Login -->
+        <button id="enviar" type="submit" onclick="verificacao()">Entrar</button>
+        <!-- Link de Esqueci a Senha -->
+
+        <footer class="rodape">
+            <a>Desenvolvido por Kaio Vilas</a>
+            </footer>
+        
+    </div>
+
+    
 </body>
 </html>
-
-

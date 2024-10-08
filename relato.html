@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Relato do Dia</title>
+    <script type="module">
+        // Importando as bibliotecas do Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdq_kV9MrE7xWo5vJ61tZV33L0B-UQKvE",
+            authDomain: "relato-producao.firebaseapp.com",
+            projectId: "relato-producao",
+            storageBucket: "relato-producao.appspot.com",
+            messagingSenderId: "645787294401",
+            appId: "1:645787294401:web:40a4ef0dbb7adaf5da1240",
+            measurementId: "G-JNTFWK7MBR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        window.enviarDados = function() {
+            const dados = {};
+            for (let i = 1; i <= 8; i++) {
+                dados[`input${i}`] = document.getElementById(`input${i}`).value;
+            }
+            // Coletar dados das textareas
+            dados['segurancaMeioAmbiente'] = document.getElementById('segurancaMeioAmbiente').value;
+            dados['manutencao1'] = document.getElementById('manutencao1').value;
+            dados['manutencao2'] = document.getElementById('manutencao2').value;
+            dados['absenteismo'] = document.getElementById('absenteismo').value;
+
+            const dataHora = new Date().toISOString().replace(/[:.]/g, '-');
+            console.log('Dados a serem enviados:', { ...dados, dataHora });
+            set(ref(database, 'relatos/' + dataHora), { ...dados, dataHora })
+                .then(() => {
+                    alert('Dados armazenados com sucesso!');
+                    document.getElementById('meuForm').reset();
+                })
+                .catch((error) => {
+                    console.error('Erro ao armazenar dados:', error);
+                    alert('Erro ao armazenar dados.');
+                });
+        }
+    </script>
+</head>
+<body class="principal">
+    <section class="cabecalho">
+        <h1 class="cabecalho_titulo">APONTAMENTO DE PRODUÇÃO GERAL</h1>
+    </section>
+    <section class="secao_principal">
+        <form id="meuForm">
+            <input type="text" placeholder="LCT01" id="input1" class="entrada"><br>
+            <input type="text" placeholder="LCT03" id="input2" class="entrada"><br>
+            <input type="text" placeholder="LPP03" id="input3" class="entrada"><br>
+            <input type="text" placeholder="DOB02" id="input4" class="entrada"><br>
+            <input type="text" placeholder="FUR01" id="input5" class="entrada"><br>
+            <input type="text" placeholder="LFT01" id="input6" class="entrada"><br>
+            <input type="text" placeholder="LCL03" id="input7" class="entrada"><br>
+            <input type="text" placeholder="PR03" id="input8" class="entrada"><br>
+            <textarea class="entrada" placeholder="Segurança e Meio Ambiente:" id="segurancaMeioAmbiente" rows="4" cols="50"></textarea>
+            <textarea class="entrada" placeholder="Manutenção 1:" id="manutencao1" rows="4" cols="50"></textarea>
+            <textarea class="entrada" placeholder="Absenteísmo::" id="manutencao2" rows="4" cols="50"></textarea>
+            <textarea class="entrada" placeholder="OBSERVAÇÃO" id="absenteismo" rows="4" cols="50"></textarea>
+            <button type="button" onclick="enviarDados()" class="botao">REPORTAR</button>
+        </form>
+    </section>
+</body>
+</html>
+
+
